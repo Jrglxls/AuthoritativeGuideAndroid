@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">GeoQuiz</string>
+    <string name="question_text">你是傻逼吗？</string>
+</resources>
