@@ -7,17 +7,17 @@
     tools:context="com.authoritativeguide.geoquiz.QuizActivity">
 
     <TextView
-        android:id="@+id/tv_question_text"
+        android:id="@+id/tv_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/question_text"
         android:layout_centerInParent="true"
         android:textSize="18sp"/>
 
     <LinearLayout
+        android:id="@+id/ll_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_question_text"
+        android:layout_below="@+id/tv_content"
         android:orientation="horizontal"
         android:gravity="center">
 
@@ -36,4 +36,20 @@
             android:text="你才是"/>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_next"
+        android:text="下一个"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/ll_layout"/>
+
+    <Button
+        android:id="@+id/btn_pre"
+        android:text="上一个"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btn_next"/>
 </RelativeLayout>
