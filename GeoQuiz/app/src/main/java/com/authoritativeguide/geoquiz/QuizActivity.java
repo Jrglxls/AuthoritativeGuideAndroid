@@ -32,6 +32,10 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
+        if (savedInstanceState!=null){
+            //获取保存的position
+            position = savedInstanceState.getInt("position",0);
+        }
         //确定
         btnSure = (Button) findViewById(R.id.btn_true);
         btnSure.setOnClickListener(this);
@@ -49,6 +53,18 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         btnPre = (Button) findViewById(R.id.btn_pre);
         btnPre.setOnClickListener(this);
     }
+
+    /**
+     *  设备旋转前保存数据 将position保存
+     *  重新创建activity获取值
+     */
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        //保存当前position
+        outState.putInt("position",position);
+    }
+
 
     @Override
     public void onClick(View view) {
