@@ -10,7 +10,8 @@
         android:id="@+id/tv_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
         android:textSize="18sp"/>
 
     <LinearLayout
@@ -52,4 +53,12 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/btn_next"/>
+
+    <Button
+        android:id="@+id/btn_answer"
+        android:text="答案"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btn_pre"/>
 </RelativeLayout>

@@ -2,7 +2,7 @@ package com.authoritativeguide.geoquiz;
 
 /**
  * Created by Jrglxls on 2016/11/24.
- * 模型
+ * 实体模型
  */
 
 public class TrueFalse {

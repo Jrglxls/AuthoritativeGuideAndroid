@@ -1,14 +1,20 @@
 package com.authoritativeguide.geoquiz;
 
-import android.support.v7.app.AppCompatActivity;
+import android.annotation.TargetApi;
+import android.app.ActionBar;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class QuizActivity extends AppCompatActivity implements View.OnClickListener{
+/**
+ * 问题页面
+ */
+public class QuizActivity extends Activity implements View.OnClickListener{
     //确定
     private Button btnSure;
     //取消
@@ -19,6 +25,8 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnNext;
     //上一个
     private Button btnPre;
+    //答案
+    private Button btnAnswer;
     //数据
     private TrueFalse[] trueFalse = new TrueFalse[]{
             new TrueFalse("111111",true),new TrueFalse("222222",true),
@@ -27,7 +35,11 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     };
     //当前位置
     private int position = 0;
+    //是否查看过答案
+    private Boolean isLookAnswer = false;
 
+    //使用注解声明版本信息
+//    @TargetApi(11)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +64,17 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         //上一个
         btnPre = (Button) findViewById(R.id.btn_pre);
         btnPre.setOnClickListener(this);
+        //答案
+        btnAnswer = (Button) findViewById(R.id.btn_answer);
+        btnAnswer.setOnClickListener(this);
+
+        //将ActionBar置于检查Android设备版本的条件语句中
+        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.HONEYCOMB){
+            ActionBar actionBar = getActionBar();
+            if (actionBar != null) {
+                actionBar.setSubtitle("这是个啥");
+            }
+        }
     }
 
     /**
@@ -83,6 +106,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.tv_content:
             case R.id.btn_next:
                 position = (position + 1)%trueFalse.length;
+                isLookAnswer = false;
                 setText();
                 break;
             //上一个
@@ -93,6 +117,18 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
                     position = (position - 1)%trueFalse.length;
                     setText();
                 }
+                break;
+            //查看答案
+            case R.id.btn_answer:
+                Intent intent = new Intent(QuizActivity.this,CheatActivity.class);
+                //获取当前问题的答案
+                boolean answer = trueFalse[position].isTrueQuestion();
+                //传递当前问题的答案
+                intent.putExtra(CheatActivity.EXTRA_ANSWER_IS_TURE,answer);
+                //普通跳转
+//                startActivity(intent);
+                //返回结果跳转
+                startActivityForResult(intent,0);
                 break;
         }
     }
@@ -114,12 +150,29 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         //显示信息
         String message ;
 
-        if(tureOrFalse == answer){
-            message = "正确";
+        if (isLookAnswer){
+            message = "作弊";
         }else {
-            message = "错误";
+            if(tureOrFalse == answer){
+                message = "正确";
+            }else {
+                message = "错误";
+            }
         }
-
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * 返回结果处理
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data == null){
+            return;
+        }else {
+            //设置是否查看过答案
+            isLookAnswer = data.getBooleanExtra(CheatActivity.EXTRA_ANDWER_SHOW,false);
+        }
     }
 }
