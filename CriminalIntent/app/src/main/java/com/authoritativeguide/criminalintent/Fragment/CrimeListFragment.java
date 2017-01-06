@@ -1,6 +1,5 @@
-package com.authoritativeguide.criminalintent;
+package com.authoritativeguide.criminalintent.Fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,9 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.authoritativeguide.criminalintent.Activity.CrimeActivity;
+import com.authoritativeguide.criminalintent.Activity.CrimePagerActivity;
+import com.authoritativeguide.criminalintent.Model.Crime;
+import com.authoritativeguide.criminalintent.Model.CrimeLab;
+import com.authoritativeguide.criminalintent.R;
 
 import java.util.ArrayList;
 
@@ -62,7 +66,10 @@ public class CrimeListFragment extends ListFragment{
         // TODO: 2017/1/4 自定义
 //        Crime crime = (CrimeAdapter) getListAdapter().getItem(position);
         System.out.println("jjjjjjjjjj  "+crime.getTitle()+"被点击");
-        Intent intent = new Intent(getActivity(),CrimeActivity.class);
+        //跳转到CrimeActivity
+//        Intent intent = new Intent(getActivity(),CrimeActivity.class);
+        //跳转到CrimePagerActivity
+        Intent intent = new Intent(getActivity(), CrimePagerActivity.class);
         //传递ID
         intent.putExtra("UUID",crime.getUuid());
         startActivity(intent);

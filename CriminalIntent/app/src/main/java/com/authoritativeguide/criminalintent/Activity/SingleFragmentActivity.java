@@ -1,9 +1,11 @@
-package com.authoritativeguide.criminalintent;
+package com.authoritativeguide.criminalintent.Activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+
+import com.authoritativeguide.criminalintent.R;
 
 /**
  * Created by Jrglxls on 2016/12/22.

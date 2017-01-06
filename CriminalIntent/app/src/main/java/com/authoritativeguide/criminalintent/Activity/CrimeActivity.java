@@ -1,6 +1,8 @@
-package com.authoritativeguide.criminalintent;
+package com.authoritativeguide.criminalintent.Activity;
 
 import android.support.v4.app.Fragment;
+
+import com.authoritativeguide.criminalintent.Fragment.CrimeFragment;
 
 import java.util.UUID;
 

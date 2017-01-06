@@ -1,4 +1,4 @@
-package com.authoritativeguide.criminalintent;
+package com.authoritativeguide.criminalintent.Fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -13,6 +13,10 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+
+import com.authoritativeguide.criminalintent.Model.Crime;
+import com.authoritativeguide.criminalintent.Model.CrimeLab;
+import com.authoritativeguide.criminalintent.R;
 
 import java.util.UUID;
 

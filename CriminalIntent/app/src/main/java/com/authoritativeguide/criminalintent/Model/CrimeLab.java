@@ -1,4 +1,4 @@
-package com.authoritativeguide.criminalintent;
+package com.authoritativeguide.criminalintent.Model;
 
 import android.content.Context;
 

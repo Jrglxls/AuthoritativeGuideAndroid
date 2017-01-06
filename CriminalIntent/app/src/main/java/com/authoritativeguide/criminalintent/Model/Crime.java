@@ -1,4 +1,4 @@
-package com.authoritativeguide.criminalintent;
+package com.authoritativeguide.criminalintent.Model;
 
 import java.util.Date;
 import java.util.UUID;
