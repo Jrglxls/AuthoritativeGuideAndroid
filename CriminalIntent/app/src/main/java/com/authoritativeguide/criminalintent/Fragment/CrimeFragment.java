@@ -1,9 +1,11 @@
 package com.authoritativeguide.criminalintent.Fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -18,6 +20,7 @@ import com.authoritativeguide.criminalintent.Model.Crime;
 import com.authoritativeguide.criminalintent.Model.CrimeLab;
 import com.authoritativeguide.criminalintent.R;
 
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -95,9 +98,24 @@ public class CrimeFragment extends Fragment {
         //日期按钮
         btnCrimeDate = (Button) view.findViewById(R.id.btn_crime_date);
         //设置日期
-        btnCrimeDate.setText(crime.getDate().toString());
+        updateDate();
         //设置按钮不可点击
-        btnCrimeDate.setEnabled(false);
+//        btnCrimeDate.setEnabled(false);
+        btnCrimeDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //fragment管理器
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                //创建DatePickerFragment对象
+//                DatePickerFragment datePickerFragment = new DatePickerFragment();
+                //创建DatePickerFragment对象，传递时间参数
+                DatePickerFragment datePickerFragment = DatePickerFragment.newInstance(crime.getDate());
+                //设置目标Fragment，请求代码常量
+                datePickerFragment.setTargetFragment(CrimeFragment.this,0);
+                //显示对话框 参数一 fragment管理器 参数二 tag
+                datePickerFragment.show(fragmentManager,"DATE");
+            }
+        });
         //复选框
         cbCrimeSolve = (CheckBox) view.findViewById(R.id.cb_crime_solve);
         cbCrimeSolve.setChecked(crime.getSolve());
@@ -117,5 +135,27 @@ public class CrimeFragment extends Fragment {
      */
     public void returnResult(){
         getActivity().setResult(Activity.RESULT_OK,null);
+    }
+
+    /**
+     * 响应对话框
+     */
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK){
+            return;
+        }
+        if (requestCode == 0){
+            //获取对话框响应的参数
+            Date date = (Date) data.getSerializableExtra("DATE");
+            //设置时间
+            crime.setDate(date);
+            //更新时间
+            updateDate();
+        }
+    }
+
+    private void updateDate(){
+        btnCrimeDate.setText(crime.getDate().toString());
     }
 }
