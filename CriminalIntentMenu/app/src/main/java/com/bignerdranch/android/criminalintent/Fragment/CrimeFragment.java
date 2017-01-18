@@ -70,6 +70,7 @@ public class CrimeFragment extends Fragment {
         UUID crimeId = (UUID)getArguments().getSerializable(EXTRA_CRIME_ID);
         mCrime = CrimeLab.get(getActivity()).getCrime(crimeId);
 
+        //开启选项菜单处理
         setHasOptionsMenu(true);
     }
     
@@ -87,9 +88,13 @@ public class CrimeFragment extends Fragment {
         //第二个参数是视图的父视图，通常需要父视图类正确配置组件
         //第三个参数告知布局生成器是否将生成的视图添加给父视图，将通过activity代码的方式添加视图
         View view = inflater.inflate(R.layout.fragment_crime, parent, false);
-  
+
+        //启用向上导航按钮
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
+            //判断父类是否存在
+            if (NavUtils.getParentActivityName(getActivity()) != null){
+                getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
+            }
         }
 
         //输入框
@@ -170,11 +175,19 @@ public class CrimeFragment extends Fragment {
         getActivity().setResult(Activity.RESULT_OK,null);
     }
 
+    /**
+     * 菜单栏点击
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            //向上返回按钮
             case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(getActivity());
+                //检查元数据中是否指定了父类
+                if (NavUtils.getParentActivityName(getActivity()) != null){
+                    //导航至父界面
+                    NavUtils.navigateUpFromSameTask(getActivity());
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

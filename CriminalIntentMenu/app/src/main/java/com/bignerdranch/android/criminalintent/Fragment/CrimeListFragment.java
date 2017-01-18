@@ -27,6 +27,7 @@ import com.bignerdranch.android.criminalintent.R;
 public class CrimeListFragment extends ListFragment {
     //创建列表对象
     private ArrayList<Crime> mCrimes;
+    //菜单项标题是否显示
     private boolean mSubtitleVisible;
 
     @Override
@@ -53,8 +54,9 @@ public class CrimeListFragment extends ListFragment {
         CrimeAdapter adapter = new CrimeAdapter(mCrimes);
         setListAdapter(adapter);
 
-
+        //通知FragmentManager接受调用指令
         setRetainInstance(true);
+        //默认不显示
         mSubtitleVisible = false;
     }
 
@@ -64,7 +66,10 @@ public class CrimeListFragment extends ListFragment {
         //刷新列表
         ((CrimeAdapter)getListAdapter()).notifyDataSetChanged();
     }
-    
+
+    /**
+     * 旋转保存菜单栏标题
+     */
     @TargetApi(11)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -72,13 +77,16 @@ public class CrimeListFragment extends ListFragment {
         
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {   
             if (mSubtitleVisible) {
-                getActivity().getActionBar().setSubtitle(R.string.subtitle);
+                getActivity().getActionBar().setSubtitle("something");
             }
         }
         
         return v;
     }
 
+    /**
+     * 列表点击事件
+     */
     public void onListItemClick(ListView l, View v, int position, long id) {
         //方法一 默认
 //        Crime crime = (Crime) getListAdapter().getItem(position);
@@ -102,36 +110,53 @@ public class CrimeListFragment extends ListFragment {
         ((CrimeAdapter)getListAdapter()).notifyDataSetChanged();
     }
 
+    /**
+     * 设置菜单栏
+     */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
+        //添加布局
         inflater.inflate(R.menu.fragment_crime_list, menu);
+
+        //查看菜单栏标题状态
         MenuItem showSubtitle = menu.findItem(R.id.menu_item_show_subtitle);
         if (mSubtitleVisible && showSubtitle != null) {
-            showSubtitle.setTitle(R.string.hide_subtitle);
+            showSubtitle.setTitle("隐藏");
         }
     }
 
     @TargetApi(11)
     @Override
+    /**
+     * 菜单栏点击事件
+     */
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            //新建
             case R.id.menu_item_new_crime:
+                //新建Crime对象
                 Crime crime = new Crime();
+                //将新建的Crime添加到CrimeLab列表中
                 CrimeLab.get(getActivity()).addCrime(crime);
+                //跳转到详情页
                 Intent i = new Intent(getActivity(), CrimeActivity.class);
+                //传递Crime UUID
                 i.putExtra(CrimeFragment.EXTRA_CRIME_ID, crime.getId());
                 startActivityForResult(i, 0);
                 return true;
+            //菜单项标题
             case R.id.menu_item_show_subtitle:
+                //显示
             	if (getActivity().getActionBar().getSubtitle() == null) {
-                    getActivity().getActionBar().setSubtitle(R.string.subtitle);
+                    getActivity().getActionBar().setSubtitle("something");
                     mSubtitleVisible = true;
-                    item.setTitle(R.string.hide_subtitle);
+                    item.setTitle("隐藏");
+                //未显示
             	}  else {
             		getActivity().getActionBar().setSubtitle(null);
             		 mSubtitleVisible = false;
-            		item.setTitle(R.string.show_subtitle);
+            		item.setTitle("显示");
             	}
                 return true;
             default:

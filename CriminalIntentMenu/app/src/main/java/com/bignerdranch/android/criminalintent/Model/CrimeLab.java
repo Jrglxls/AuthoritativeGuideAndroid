@@ -56,7 +56,10 @@ public class CrimeLab {
         }
         return null;
     }
-    
+
+    /**
+     * 新建
+     */
     public void addCrime(Crime c) {
         mCrimes.add(c);
     }
