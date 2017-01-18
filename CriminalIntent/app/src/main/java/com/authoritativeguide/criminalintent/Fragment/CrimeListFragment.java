@@ -63,8 +63,8 @@ public class CrimeListFragment extends ListFragment{
     public void onListItemClick(ListView l, View v, int position, long id) {
         //方法一 默认
         Crime crime = (Crime) getListAdapter().getItem(position);
-        // TODO: 2017/1/4 自定义
-//        Crime crime = (CrimeAdapter) getListAdapter().getItem(position);
+        //方法二 自定义
+//        Crime crime = ((CrimeAdapter)getListAdapter()).getItem(position);
         System.out.println("jjjjjjjjjj  "+crime.getTitle()+"被点击");
         //跳转到CrimeActivity
 //        Intent intent = new Intent(getActivity(),CrimeActivity.class);
