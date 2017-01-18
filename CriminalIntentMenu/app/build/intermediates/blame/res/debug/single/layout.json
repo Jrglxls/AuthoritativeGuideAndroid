@@ -1,0 +1,42 @@
+[
+    {
+        "merged": "H:\\AuthoritativeGuide\\CriminalIntentMenu\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_fragment.xml",
+        "source": "H:\\AuthoritativeGuide\\CriminalIntentMenu\\app\\src\\main\\res\\layout\\activity_fragment.xml"
+    },
+    {
+        "merged": "E:\\CriminalIntentMenu\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_crime.xml",
+        "source": "E:\\CriminalIntentMenu\\app\\src\\main\\res\\layout\\fragment_crime.xml"
+    },
+    {
+        "merged": "H:\\AuthoritativeGuide\\CriminalIntentMenu\\app\\build\\intermediates\\res\\merged\\debug\\layout\\list_item_crime.xml",
+        "source": "H:\\AuthoritativeGuide\\CriminalIntentMenu\\app\\src\\main\\res\\layout\\list_item_crime.xml"
+    },
+    {
+        "merged": "E:\\CriminalIntentMenu\\app\\build\\intermediates\\res\\merged\\debug\\layout\\list_item_crime.xml",
+        "source": "E:\\CriminalIntentMenu\\app\\src\\main\\res\\layout\\list_item_crime.xml"
+    },
+    {
+        "merged": "H:\\AuthoritativeGuide\\CriminalIntentMenu\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_crime_pager.xml",
+        "source": "H:\\AuthoritativeGuide\\CriminalIntentMenu\\app\\src\\main\\res\\layout\\activity_crime_pager.xml"
+    },
+    {
+        "merged": "E:\\CriminalIntentMenu\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_crime_pager.xml",
+        "source": "E:\\CriminalIntentMenu\\app\\src\\main\\res\\layout\\activity_crime_pager.xml"
+    },
+    {
+        "merged": "E:\\CriminalIntentMenu\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_fragment.xml",
+        "source": "E:\\CriminalIntentMenu\\app\\src\\main\\res\\layout\\activity_fragment.xml"
+    },
+    {
+        "merged": "H:\\AuthoritativeGuide\\CriminalIntentMenu\\app\\build\\intermediates\\res\\merged\\debug\\layout\\dialog_date.xml",
+        "source": "H:\\AuthoritativeGuide\\CriminalIntentMenu\\app\\src\\main\\res\\layout\\dialog_date.xml"
+    },
+    {
+        "merged": "E:\\CriminalIntentMenu\\app\\build\\intermediates\\res\\merged\\debug\\layout\\dialog_date.xml",
+        "source": "E:\\CriminalIntentMenu\\app\\src\\main\\res\\layout\\dialog_date.xml"
+    },
+    {
+        "merged": "H:\\AuthoritativeGuide\\CriminalIntentMenu\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_crime.xml",
+        "source": "H:\\AuthoritativeGuide\\CriminalIntentMenu\\app\\src\\main\\res\\layout\\fragment_crime.xml"
+    }
+]
