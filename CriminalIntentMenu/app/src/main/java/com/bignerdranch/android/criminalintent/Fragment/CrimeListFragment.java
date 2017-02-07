@@ -7,12 +7,16 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.view.ActionMode;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
@@ -80,8 +84,92 @@ public class CrimeListFragment extends ListFragment {
                 getActivity().getActionBar().setSubtitle("something");
             }
         }
-        
+
+        //使用android.R.id.list资源ID获取ListFragment管理着的ListView
+        ListView listView = (ListView) v.findViewById(android.R.id.list);
+        //低配设备
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){
+            //为上下文菜单登记ListView
+            registerForContextMenu(listView);
+        }else {
+        //高配设备
+            //列表多项选择设置
+            listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+            //列表多项选择监听
+            listView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
+                public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
+
+                }
+
+                //实例化上下文菜单资源，并显示在上下文操作栏上的任务完成的地方
+                public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                    MenuInflater inflater = mode.getMenuInflater();
+                    inflater.inflate(R.menu.crime_list_item_context,menu);
+                    return true;
+                }
+
+                //需要刷新显示新数据时调用
+                public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                    return false;
+                }
+
+                //响应上下文菜单项操作的地方
+                public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                    switch (item.getItemId()){
+                        case R.id.menu_item_delete_crime:
+                            CrimeAdapter crimeAdapter = (CrimeAdapter) getListAdapter();
+                            CrimeLab crimeLab = CrimeLab.get(getActivity());
+                            for (int i = crimeAdapter.getCount()-1;i >= 0 ;i--){
+                                if (getListView().isItemChecked(i)){
+                                    crimeLab.deleteCrime(crimeAdapter.getItem(i));
+                                }
+                            }
+                            mode.finish();
+                            crimeAdapter.notifyDataSetChanged();
+                            return true;
+                        default:
+                            return false;
+                    }
+                }
+
+                //退出上下文操作模式或所选菜单项操作已被响应
+                public void onDestroyActionMode(ActionMode mode) {
+
+                }
+            });
+        }
+
         return v;
+    }
+
+    /**
+     * 实例化菜单资源，并用它填充上下文菜单
+     */
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        getActivity().getMenuInflater().inflate(R.menu.crime_list_item_context,menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        //调用getMenuInfo方法，获取要删除crime对象的信息
+        AdapterView.AdapterContextMenuInfo adapterContextMenuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        //获取要删除crime对象的位置
+        int position = adapterContextMenuInfo.position;
+        //创建crimeAdapter对象
+        CrimeAdapter crimeAdapter = (CrimeAdapter) getListAdapter();
+        //获取要删除crime对象
+        Crime crime = crimeAdapter.getItem(position);
+
+        switch (item.getItemId()){
+            case R.id.menu_item_delete_crime:
+                //删除crime
+                CrimeLab.get(getActivity()).deleteCrime(crime);
+                //更新列表
+                crimeAdapter.notifyDataSetChanged();
+                return true;
+        }
+        return super.onContextItemSelected(item);
     }
 
     /**

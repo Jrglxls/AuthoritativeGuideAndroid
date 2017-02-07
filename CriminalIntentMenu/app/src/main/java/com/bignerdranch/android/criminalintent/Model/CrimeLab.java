@@ -103,6 +103,9 @@ public class CrimeLab {
         }
     }
 
+    /**
+     *  删除Crime
+     */
     public void deleteCrime(Crime c) {
         mCrimes.remove(c);
     }
