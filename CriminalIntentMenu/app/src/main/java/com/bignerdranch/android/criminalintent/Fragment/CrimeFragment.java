@@ -73,7 +73,16 @@ public class CrimeFragment extends Fragment {
         //开启选项菜单处理
         setHasOptionsMenu(true);
     }
-    
+
+    /**
+     * 保存数据
+     */
+    @Override
+    public void onPause() {
+        super.onPause();
+        CrimeLab.get(getActivity()).saveCrimes();
+    }
+
     public void updateDate() {
         mDateButton.setText(mCrime.getDate().toString());
     }

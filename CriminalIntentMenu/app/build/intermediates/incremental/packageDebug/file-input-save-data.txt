@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Wed Jan 18 17:15:33 CST 2017
+#Wed Jan 18 18:28:58 CST 2017
 8.set=ANDROID_RESOURCE
 1.base=H\:\\AuthoritativeGuide\\CriminalIntentMenu\\app\\build\\intermediates\\res\\resources-debug.ap_
 1.file=H\:\\AuthoritativeGuide\\CriminalIntentMenu\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\menu\\fragment_crime_list.xml

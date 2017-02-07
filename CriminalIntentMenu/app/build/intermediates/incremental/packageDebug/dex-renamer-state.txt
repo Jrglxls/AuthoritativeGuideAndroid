@@ -1,4 +1,4 @@
-#Wed Jan 18 17:15:32 CST 2017
+#Tue Feb 07 14:55:30 CST 2017
 base.0=H\:\\AuthoritativeGuide\\CriminalIntentMenu\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main
 renamed.0=classes.dex
 file.0=H\:\\AuthoritativeGuide\\CriminalIntentMenu\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main\\classes.dex
